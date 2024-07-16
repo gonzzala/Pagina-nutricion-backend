@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductImageController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Web\AdminController;
+use App\Http\Controllers\Web\ProductController;
+use App\Http\Controllers\Web\ProductImageController;
+use App\Http\Controllers\Web\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
@@ -26,4 +26,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/admins/{id}', [AdminController::class, 'destroy'])->name('admins.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Requests\AdminRequest;
 use App\Http\Requests\AdminUpdateRequest;
@@ -13,7 +13,7 @@ class AdminController extends Controller
     public function create()
     {
         $admins = User::all();
-        
+
         return view('admins.admins', compact('admins'));
     }
 
@@ -27,7 +27,6 @@ class AdminController extends Controller
         $user->save();
 
         return redirect()->route('admins.create')->with('success', 'Administrador creado correctamente.');
-    
     }
 
     public function update(AdminUpdateRequest $request, $id)
@@ -40,8 +39,7 @@ class AdminController extends Controller
         };
         $admin->save();
 
-        return redirect()->route('admins.create')->with('success', 'Administrador de nombre: '. $admin->name .' actualizado exitosamente.');
-        
+        return redirect()->route('admins.create')->with('success', 'Administrador de nombre: ' . $admin->name . ' actualizado exitosamente.');
     }
 
     public function destroy($id)
@@ -49,7 +47,6 @@ class AdminController extends Controller
         $admin = User::find($id);
         $admin->delete();
 
-        return redirect()->route('admins.create')->with('success', 'Administrador de nombre: '. $admin->name .' eliminado exitosamente.');
-        
+        return redirect()->route('admins.create')->with('success', 'Administrador de nombre: ' . $admin->name . ' eliminado exitosamente.');
     }
 }

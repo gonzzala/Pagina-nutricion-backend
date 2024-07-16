@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Requests\ProductImageRequest;
 use App\Models\ProductImage;
@@ -14,15 +14,15 @@ class ProductImageController extends Controller
     public function store(ProductImageRequest $request, $product_id)
     {
         if ($request->hasFile('images')) {
-        foreach ($request->file('images') as $image) {
-            $uniqueFileName = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
+            foreach ($request->file('images') as $image) {
+                $uniqueFileName = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
 
-            $imagePath = $image->storeAs('products', $uniqueFileName, 'public');
+                $imagePath = $image->storeAs('products', $uniqueFileName, 'public');
 
-            $productImage = new ProductImage();
-            $productImage->product_id = $product_id;
-            $productImage->image_path = $imagePath; 
-            $productImage->save();
+                $productImage = new ProductImage();
+                $productImage->product_id = $product_id;
+                $productImage->image_path = $imagePath;
+                $productImage->save();
             }
         }
         return redirect()->route('products.create')->with('success', 'Imagen guardada correctamente.');
@@ -35,10 +35,10 @@ class ProductImageController extends Controller
         if ($productImage) {
             $imagePath = $productImage->image_path;
             $storagePath = 'public/' . $imagePath;
-    
+
             if (Storage::exists($storagePath)) {
                 Storage::delete($storagePath);
-            } 
+            }
             $productImage->delete();
         }
 
