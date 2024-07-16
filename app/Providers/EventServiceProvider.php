@@ -2,6 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\CreateCartEvent;
+use App\Events\CreateOrderEvent;
+use App\Events\OrderApprovedEvent;
+use App\Listeners\GenerateCartItemsListener;
+use App\Listeners\GenerateOrderItemsListener;
+use App\Listeners\SendNutritionalPlanFormListener;
+use App\Models\Cart;
 use App\Models\Product;
 use App\Observers\ProductObserver;
 use Illuminate\Auth\Events\Registered;
@@ -20,6 +27,15 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        CreateCartEvent::class => [
+            GenerateCartItemsListener::class
+        ],
+        CreateOrderEvent::class => [
+            GenerateOrderItemsListener::class
+        ],
+        OrderApprovedEvent::class =>[
+            SendNutritionalPlanFormListener::class
+        ]
     ];
 
     /**
