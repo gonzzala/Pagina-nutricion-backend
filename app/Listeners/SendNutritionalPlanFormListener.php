@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\OrderApprovedEvent;
 use App\Mail\NutritionalPlanForm;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -21,7 +22,7 @@ class SendNutritionalPlanFormListener
     /**
      * Handle the event.
      */
-    public function handle(object $event): void
+    public function handle(OrderApprovedEvent $event): void
     {
         $formLink = 'https://forms.gle/fCLL4boBbLCeQuXC6';
 
@@ -32,7 +33,6 @@ class SendNutritionalPlanFormListener
         foreach ($orderItems as $item) {
             if ($item->product->category->category == 'Nutricional') {
                 Log::info('la categoria es nutricional, vamos a mandar el mail');
-                // Enviar correo al cliente con el formulario
                 Mail::to($order->email)->send(new NutritionalPlanForm($order, $formLink));
             }
         }

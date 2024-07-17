@@ -4,15 +4,15 @@ namespace App\Providers;
 
 use App\Events\CreateCartEvent;
 use App\Events\CreateOrderEvent;
+use App\Events\CreateProductEvent;
 use App\Events\OrderApprovedEvent;
 use App\Listeners\GenerateCartItemsListener;
 use App\Listeners\GenerateOrderItemsListener;
+use App\Listeners\notifyAdminsListener;
+use App\Listeners\SaveProductImagesListener;
 use App\Listeners\SendNutritionalPlanFormListener;
-use App\Models\Cart;
 use App\Models\Product;
 use App\Observers\ProductObserver;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 
@@ -24,9 +24,9 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        Registered::class => [
+        /* Registered::class => [
             SendEmailVerificationNotification::class,
-        ],
+        ], */
         CreateCartEvent::class => [
             GenerateCartItemsListener::class
         ],
@@ -34,8 +34,12 @@ class EventServiceProvider extends ServiceProvider
             GenerateOrderItemsListener::class
         ],
         OrderApprovedEvent::class =>[
-            SendNutritionalPlanFormListener::class
-        ]
+            SendNutritionalPlanFormListener::class,
+            notifyAdminsListener::class
+        ],
+        CreateProductEvent::class =>[
+            SaveProductImagesListener::class
+        ],
     ];
 
     /**
