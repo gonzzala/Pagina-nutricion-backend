@@ -12,11 +12,11 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Descripcion</th>
+                <th scope="col">Descripción</th>
                 <th scope="col">Preview</th>
                 <th scope="col">Precio</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Imagenes</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Imágenes</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>

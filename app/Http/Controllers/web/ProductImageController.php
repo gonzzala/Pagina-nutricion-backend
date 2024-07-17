@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Web;
 use App\Http\Requests\ProductImageRequest;
 use App\Models\ProductImage;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProductImageController extends Controller

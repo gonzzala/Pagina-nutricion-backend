@@ -4,7 +4,9 @@ use App\Http\Controllers\Web\AdminController;
 use App\Http\Controllers\Web\ProductController;
 use App\Http\Controllers\Web\ProductImageController;
 use App\Http\Controllers\Web\ProfileController;
+use App\Http\Controllers\Web\PurchasingController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -24,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admins', [AdminController::class, 'store'])->name('admins.store');
     Route::patch('/admins/{id}', [AdminController::class, 'update'])->name('admins.update');
     Route::delete('/admins/{id}', [AdminController::class, 'destroy'])->name('admins.destroy');
+    Route::get('/purchases', [PurchasingController::class, 'index'])->name('purchases.index');
 });
 
 require __DIR__ . '/auth.php';

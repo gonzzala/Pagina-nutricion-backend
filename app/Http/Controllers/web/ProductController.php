@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Events\CreateProductEvent;
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\ProductImage;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -23,33 +20,15 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        // Crear un nuevo producto usando Eloquent y asignar valores
         $product = new Product();
         $product->name = $request->name;
         $product->description = $request->description;
         $product->preview = $request->preview;
         $product->price = $request->price;
-        $product->category_id = $request->category_id; // Asignar la categoría
-
-        // Guardar el producto en la base de datos
+        $product->category_id = $request->category_id; 
         $product->save();
 
-        // Manejar las imágenes
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                // Generar un nombre de archivo único usando timestamp y un hash
-                $uniqueFileName = time() . '_' . Str::random(10) . '.' . $image->getClientOriginalExtension();
-
-                // Almacenar la imagen con el nombre de archivo único
-                $imagePath = $image->storeAs('products', $uniqueFileName, 'public');
-
-                // Crear una nueva instancia de ProductImage y asociarla al producto
-                $productImage = new ProductImage();
-                $productImage->product_id = $product->product_id; // Asignar el ID del producto
-                $productImage->image_path = $imagePath; // Asignar la ruta de la imagen
-                $productImage->save(); // Guardar el registro en la base de datos
-            }
-        }
+        CreateProductEvent::dispatch($product, $request->file('images'));
 
         return redirect()->route('products.create')->with('success', 'Producto creado correctamente.');
     }

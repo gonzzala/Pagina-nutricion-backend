@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web;
 use App\Http\Requests\AdminRequest;
 use App\Http\Requests\AdminUpdateRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller

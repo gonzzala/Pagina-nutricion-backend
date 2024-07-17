@@ -333,7 +333,7 @@ return [
         ],
         [
             'text' => 'Compras',
-            'url' => 'admin/settings',
+            'route' => 'purchases.index',
             'icon' => 'fas fa-fw fa-shopping-cart',
         ],
         [

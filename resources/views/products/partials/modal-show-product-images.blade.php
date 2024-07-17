@@ -16,7 +16,7 @@
                       <form action="{{ route('product-images.destroy', $image->productimage_id) }}" method="POST">
                           @method('DELETE')
                           @csrf
-                          <button type="submit" class="btn btn-danger" onclick="return confirm('¿Segura que quieres eliminar esta imagen?')">
+                          <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estas seguro/a de que quieres eliminar esta imagen?')">
                               <i class="fas fa-trash" aria-hidden="true"></i> Borrar imagen
                           </button>
                       </form>
