@@ -34,7 +34,6 @@ class notifyAdminsListener
         foreach ($admins as $admin) {
             Mail::to($admin->email)->send(new PurchaseConfirmed($order, $items, $admin->name));
         }
-        Log::info('Correo enviado a los administradores para la orden aprobada - ID:', ['order_id' => $order->order_id]);
     
     } catch (\Exception $e) {
         Log::error('Error al enviar correo a los administradores:', ['exception' => $e]);
