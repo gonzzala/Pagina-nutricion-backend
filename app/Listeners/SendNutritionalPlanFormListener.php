@@ -32,7 +32,6 @@ class SendNutritionalPlanFormListener
 
         foreach ($orderItems as $item) {
             if ($item->product->category->category == 'Nutricional') {
-                Log::info('la categoria es nutricional, vamos a mandar el mail');
                 Mail::to($order->email)->send(new NutritionalPlanForm($order, $formLink));
             }
         }

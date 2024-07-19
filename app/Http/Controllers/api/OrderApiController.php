@@ -70,7 +70,7 @@ class OrderApiController extends Controller
                 'success' => "https://www.youtube.com/watch?v=s29AsZ4OeC4", 
             ],
             'auto_return' => 'approved',
-            'notification_url' => "https://e66c-200-122-104-165.ngrok-free.app/api/mercadopago-notification",
+            'notification_url' => "https://7d03-200-122-104-165.ngrok-free.app/api/mercadopago-notification",
         ]);
     }
 

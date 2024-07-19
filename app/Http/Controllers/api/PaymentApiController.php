@@ -25,7 +25,6 @@ class PaymentApiController extends Controller
     
                     if ($response->ok()) {
                         $data = $response->json();
-                        Log::info('Detalles del pago recibido:', $data);
     
                         $order = Order::latest()->first();
 
@@ -33,8 +32,6 @@ class PaymentApiController extends Controller
                         $newStatus = $data['status'];
                         $order->status = $newStatus;
                         $order->save();
-                        Log::info('Orden actualizada - ID:', ['order_id' => $order->order_id, 'new_status' => $newStatus]);
-
 
                         if ($newStatus === 'approved') {
                             OrderApprovedEvent::dispatch($order, $data['additional_info']['items']);
@@ -43,7 +40,6 @@ class PaymentApiController extends Controller
                         return response()->json(['status' => 'OK'], 200);
 
                     } else {
-                        Log::error('Error al obtener detalles del pago:', ['status' => $response->status()]);
                         return response()->json(['status' => 'OK'], 200);
                     }}
                     
