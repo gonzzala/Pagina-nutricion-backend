@@ -63,11 +63,6 @@ return [
             ]) : [],
         ],
 
-        error_log('DB_HOST: ' . env('DB_HOST')),
-        error_log('DB_DATABASE: ' . env('DB_DATABASE')),
-        error_log('DB_USERNAME: ' . env('DB_USERNAME')),
-        error_log('DB_PASSWORD: ' . env('DB_PASSWORD')),
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

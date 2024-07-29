@@ -67,10 +67,12 @@ class OrderApiController extends Controller
             'external_reference' => $order->order_id,
             'items' => $formattedItems,
             'back_urls' => [
-                'success' => "https://www.youtube.com/watch?v=s29AsZ4OeC4", 
+                'success' => "https://angelina-nutritionandworkout.netlify.app",
+                "failure" => "https://angelina-nutritionandworkout.netlify.app/nutritional-plans",
+                "pending" => "https://angelina-nutritionandworkout.netlify.app"
             ],
             'auto_return' => 'approved',
-            'notification_url' => "https://7d03-200-122-104-165.ngrok-free.app/api/mercadopago-notification",
+            'notification_url' => "https://pagina-nutricion-backend-production.up.railway.app/api/mercadopago-notification",
         ]);
     }
 
